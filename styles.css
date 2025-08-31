@@ -1,0 +1,666 @@
+/* ClickUp Brand Colors - Dark Mode */
+:root {
+    --clickup-purple: #7B68EE;
+    --clickup-dark-purple: #6B5CE7;
+    --clickup-light-purple: #2A2544;
+    --clickup-green: #02A663;
+    --clickup-dark-green: #028A54;
+    --clickup-red: #E74C3C;
+    --clickup-gray-100: #1A1D23;
+    --clickup-gray-200: #2C3039;
+    --clickup-gray-300: #3E434D;
+    --clickup-gray-400: #5A606B;
+    --clickup-gray-500: #8B9299;
+    --clickup-gray-700: #BBBFC7;
+    --clickup-gray-900: #F1F3F5;
+    --clickup-white: #212529;
+    --clickup-dark-bg: #141619;
+    --clickup-card-bg: #1E2226;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--clickup-dark-bg);
+    color: var(--clickup-gray-900);
+    line-height: 1.6;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    background: var(--clickup-card-bg);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--clickup-gray-200);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+    color: var(--clickup-gray-900);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Wizard Container */
+.wizard-container {
+    background: var(--clickup-card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--clickup-gray-200);
+}
+
+/* Progress Bar */
+.progress-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--clickup-gray-300);
+    z-index: 1;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--clickup-gray-300);
+    color: var(--clickup-gray-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active .step-number {
+    background: var(--clickup-purple);
+    color: var(--clickup-white);
+}
+
+.progress-step.completed .step-number {
+    background: var(--clickup-green);
+    color: var(--clickup-white);
+}
+
+.progress-step span {
+    font-size: 0.875rem;
+    color: var(--clickup-gray-500);
+    font-weight: 500;
+}
+
+.progress-step.active span {
+    color: var(--clickup-purple);
+}
+
+/* Wizard Steps */
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+.wizard-step h2 {
+    color: var(--clickup-gray-900);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+/* Plan Cards */
+.plan-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.plan-card {
+    border: 2px solid var(--clickup-gray-200);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--clickup-dark-bg);
+}
+
+.plan-card:hover {
+    border-color: var(--clickup-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(123, 104, 238, 0.15);
+}
+
+.plan-card.selected {
+    border-color: var(--clickup-purple);
+    background: var(--clickup-light-purple);
+}
+
+.plan-card h3 {
+    color: var(--clickup-gray-900);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.plan-card .price {
+    color: var(--clickup-purple);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.plan-card .price span {
+    font-size: 0.875rem;
+    color: var(--clickup-gray-500);
+    font-weight: 400;
+}
+
+.plan-features {
+    margin-bottom: 1rem;
+}
+
+.plan-features p {
+    color: var(--clickup-gray-700);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.plan-note {
+    color: var(--clickup-red);
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
+
+/* Add-on Cards */
+.addon-options {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.addon-card {
+    border: 2px solid var(--clickup-gray-200);
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: var(--clickup-dark-bg);
+    transition: all 0.3s ease;
+}
+
+.addon-card.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background: var(--clickup-gray-200);
+}
+
+.addon-card.included {
+    border-color: var(--clickup-green);
+    background: rgba(2, 166, 99, 0.05);
+}
+
+.addon-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.addon-card h3 {
+    color: var(--clickup-gray-900);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.addon-card .price {
+    color: var(--clickup-purple);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.addon-card .price span {
+    font-size: 0.75rem;
+    color: var(--clickup-gray-500);
+}
+
+.addon-card p {
+    color: var(--clickup-gray-700);
+    margin-bottom: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--clickup-gray-700);
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--clickup-gray-300);
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: var(--clickup-purple);
+    border-color: var(--clickup-purple);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 3px;
+    color: var(--clickup-white);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.included-label {
+    color: var(--clickup-green);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.included-label::before {
+    content: '✓';
+    margin-right: 0.5rem;
+    font-weight: 700;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--clickup-gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--clickup-gray-200);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--clickup-dark-bg);
+    color: var(--clickup-gray-900);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--clickup-purple);
+    box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.1);
+}
+
+.error-message {
+    color: var(--clickup-red);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Discount Options */
+.discount-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.discount-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.discount-item label {
+    font-weight: 600;
+    color: var(--clickup-gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.discount-input {
+    padding: 0.75rem;
+    border: 2px solid var(--clickup-gray-200);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--clickup-dark-bg);
+    color: var(--clickup-gray-900);
+}
+
+.discount-input:focus {
+    border-color: var(--clickup-purple);
+    box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.1);
+}
+
+/* Step Actions */
+.step-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--clickup-gray-200);
+}
+
+.step-actions button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-prev {
+    background: var(--clickup-gray-200);
+    color: var(--clickup-gray-700);
+}
+
+.btn-prev:hover {
+    background: var(--clickup-gray-300);
+}
+
+.btn-next,
+.btn-generate-pdf {
+    background: var(--clickup-purple);
+    color: var(--clickup-white);
+}
+
+.btn-next:hover,
+.btn-generate-pdf:hover {
+    background: var(--clickup-dark-purple);
+}
+
+.btn-next:disabled,
+.btn-generate-pdf:disabled {
+    background: var(--clickup-gray-300);
+    color: var(--clickup-gray-500);
+    cursor: not-allowed;
+}
+
+/* Pricing Summary */
+.pricing-summary {
+    background: var(--clickup-card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--clickup-gray-200);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--clickup-gray-200);
+}
+
+.summary-header h3 {
+    color: var(--clickup-gray-900);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.view-toggle {
+    display: none;
+}
+
+.toggle-btn {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    background: transparent;
+    color: var(--clickup-gray-500);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: var(--clickup-dark-bg);
+    color: var(--clickup-purple);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.plan-summary h4 {
+    color: var(--clickup-gray-900);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.plan-includes {
+    margin-bottom: 1.5rem;
+}
+
+.plan-includes h5 {
+    color: var(--clickup-gray-700);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.plan-includes ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.plan-includes li {
+    color: var(--clickup-gray-700);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.plan-includes li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--clickup-green);
+    font-weight: 600;
+}
+
+.pricing-breakdown {
+    border-top: 1px solid var(--clickup-gray-200);
+    padding-top: 1rem;
+}
+
+.line-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+.line-item .item-name {
+    color: var(--clickup-gray-700);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.line-item .item-price {
+    color: var(--clickup-gray-900);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.savings-line {
+    border-top: 1px solid var(--clickup-gray-200);
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+}
+
+.savings-line .item-price.savings {
+    color: var(--clickup-green);
+    font-weight: 700;
+}
+
+.total-line {
+    border-top: 2px solid var(--clickup-gray-300);
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+}
+
+.total-line .item-name {
+    color: var(--clickup-gray-900);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.total-line .item-price.total {
+    color: var(--clickup-purple);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.per-user-line {
+    border-top: 1px solid var(--clickup-gray-200);
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+}
+
+.per-user-line .item-name {
+    font-size: 0.75rem;
+    color: var(--clickup-gray-500);
+}
+
+.per-user-line .item-price {
+    font-size: 0.875rem;
+    color: var(--clickup-gray-700);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .pricing-summary {
+        position: static;
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .wizard-container {
+        padding: 1.5rem;
+    }
+    
+    .plan-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .progress-bar {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .step-actions {
+        flex-direction: column;
+    }
+    
+    .discount-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hidden elements */
+.hidden {
+    display: none !important;
+}
+
+/* PDF Template Styles */
+#pdf-template {
+    width: 10in;
+    height: 5.625in;
+    background: white;
+    padding: 0.5in;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}

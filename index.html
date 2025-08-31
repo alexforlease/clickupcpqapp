@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickUp Pricing Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="attached_assets/clickup-icon-filled-256_1756581678095.png" alt="ClickUp" style="height: 40px; width: auto;">
+            </div>
+            <h1>ClickUp Pricing Calculator</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Column - Wizard Steps -->
+            <div class="wizard-container">
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <span>Plans, Add-ons & Implementation</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <span>Users & Discounts</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <span>Finalize</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Plan Selection and Add-ons -->
+                <div class="wizard-step active" id="step-1">
+                    <h2>Choose Your Plan</h2>
+                    <div class="plan-cards">
+                        <div class="plan-card" data-plan="Business Plus">
+                            <h3>Business Plus</h3>
+                            <div class="price">$19<span>/user/month</span></div>
+                            <div class="plan-features">
+                                <p>• Conditional logic in Forms</p>
+                                <p>• Advanced automations</p>
+                                <p>• Team permissions</p>
+                            </div>
+                        </div>
+                        <div class="plan-card" data-plan="Enterprise">
+                            <h3>Enterprise</h3>
+                            <div class="price">$35<span>/user/month</span></div>
+                            <div class="plan-features">
+                                <p>• Unlimited custom roles & permissions</p>
+                                <p>• Increased API & automations</p>
+                                <p>• Custom capacity planning</p>
+                            </div>
+                            <div class="plan-note">Minimum 15 users</div>
+                        </div>
+                        <div class="plan-card" data-plan="Enterprise Plus">
+                            <h3>Enterprise Plus</h3>
+                            <div class="price">$55<span>/user/month</span></div>
+                            <div class="plan-features">
+                                <p>• Dedicated ongoing support</p>
+                                <p>• ClickUp AI included</p>
+                                <p>• Advanced custom roles</p>
+                            </div>
+                            <div class="plan-note">Minimum 35 users</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--clickup-gray-900); font-size: 1.25rem;">Add-ons</h3>
+                    <div class="addon-options">
+                        <div class="addon-card" data-addon="ClickUp AI">
+                            <div class="addon-header">
+                                <h3>ClickUp AI</h3>
+                                <div class="price">$9<span>/user/month</span></div>
+                            </div>
+                            <p>AI-powered writing, summarization, and task creation</p>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="addon-checkbox">
+                                <span class="checkmark"></span>
+                                Add to proposal
+                            </label>
+                        </div>
+                        <div class="addon-card" data-addon="ClickUp Notetaker">
+                            <div class="addon-header">
+                                <h3>ClickUp Notetaker</h3>
+                                <div class="price">$10<span>/user/month</span></div>
+                            </div>
+                            <p>Automatic meeting transcription and note-taking</p>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="addon-checkbox">
+                                <span class="checkmark"></span>
+                                Add to proposal
+                            </label>
+                        </div>
+                    </div>
+                    
+                    
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--clickup-gray-900); font-size: 1.25rem;">Implementation Services</h3>
+                    <div class="form-group">
+                        <label for="implementation-hours">Implementation Hours ($300/hour)</label>
+                        <select id="implementation-hours">
+                            <option value="0">No implementation services</option>
+                            <option value="10">10 hours - $3,000</option>
+                            <option value="20">20 hours - $6,000</option>
+                            <option value="30">30 hours - $9,000</option>
+                            <option value="40">40 hours - $12,000</option>
+                            <option value="50">50 hours - $15,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="step-actions">
+                        <button class="btn-next" disabled>Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Users & Discounts -->
+                <div class="wizard-step" id="step-2">
+                    <h2>Users & Discounts</h2>
+                    <div class="form-group">
+                        <label for="user-count">How many users will be on this plan?</label>
+                        <input type="number" id="user-count" min="1" placeholder="Enter number of users">
+                        <div class="error-message" id="user-count-error"></div>
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--clickup-gray-900); font-size: 1.25rem;">Set Discounts</h3>
+                    <div class="discount-options">
+                        <div class="discount-item">
+                            <label>License Discount</label>
+                            <input type="number" class="discount-input" data-type="license" min="0" max="100" placeholder="0%">
+                        </div>
+                        <div class="discount-item" id="ai-discount-item">
+                            <label>ClickUp AI Discount</label>
+                            <input type="number" class="discount-input" data-type="ai" min="0" max="100" placeholder="0%">
+                        </div>
+                        <div class="discount-item" id="notetaker-discount-item">
+                            <label>ClickUp Notetaker Discount</label>
+                            <input type="number" class="discount-input" data-type="notetaker" min="0" max="100" placeholder="0%">
+                        </div>
+                        <div class="discount-item" id="implementation-discount-item">
+                            <label>Implementation Discount</label>
+                            <input type="number" class="discount-input" data-type="implementation" min="0" max="100" placeholder="0%">
+                        </div>
+                    </div>
+                    
+                    <div class="step-actions">
+                        <button class="btn-prev">Previous</button>
+                        <button class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Finalize -->
+                <div class="wizard-step" id="step-3">
+                    <h2>Finalize Proposal</h2>
+                    <div class="form-group">
+                        <label for="customer-name">Customer Name</label>
+                        <input type="text" id="customer-name" placeholder="Enter customer name">
+                    </div>
+                    <div class="form-group">
+                        <label for="additional-terms">Additional Terms</label>
+                        <textarea id="additional-terms" rows="4" placeholder="Enter any additional terms or conditions"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiration-date">Quote Expiration Date (optional)</label>
+                        <input type="date" id="expiration-date">
+                        <div class="error-message" id="expiration-error"></div>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn-prev">Previous</button>
+                        <button class="btn-generate-pdf">Generate PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Pricing Summary -->
+            <div class="pricing-summary">
+                <div class="summary-header">
+                    <h3>Pricing Summary</h3>
+                </div>
+                
+                <div class="summary-content">
+                    <div class="plan-summary">
+                        <h4 id="selected-plan-name">Select a plan</h4>
+                        <div class="plan-includes" id="plan-includes">
+                            <h5>Includes:</h5>
+                            <ul id="includes-list">
+                                <li>Select a plan to see features</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pricing-breakdown">
+                        <div class="line-item" id="license-line" style="display: none;">
+                            <span class="item-name">License</span>
+                            <span class="item-price" id="license-price">$0</span>
+                        </div>
+                        <div class="line-item" id="ai-line" style="display: none;">
+                            <span class="item-name">ClickUp AI</span>
+                            <span class="item-price" id="ai-price">$0</span>
+                        </div>
+                        <div class="line-item" id="notetaker-line" style="display: none;">
+                            <span class="item-name">ClickUp Notetaker</span>
+                            <span class="item-price" id="notetaker-price">$0</span>
+                        </div>
+                        <div class="line-item" id="implementation-line" style="display: none;">
+                            <span class="item-name">Implementation</span>
+                            <span class="item-price" id="implementation-price">$0</span>
+                        </div>
+                        
+                        <div class="savings-line" id="savings-line" style="display: none;">
+                            <span class="item-name">Total Savings</span>
+                            <span class="item-price savings" id="total-savings">$0</span>
+                        </div>
+                        
+                        <div class="total-line">
+                            <span class="item-name">Annual Total</span>
+                            <span class="item-price total" id="annual-total">$0</span>
+                        </div>
+                        
+                        <div class="per-user-line" id="per-user-line" style="display: none;">
+                            <span class="item-name">Effective Price per User (Annual)</span>
+                            <span class="item-price" id="per-user-price">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden PDF Template -->
+    <div id="pdf-template" style="display: none;">
+        <!-- This will be populated with the slide template content -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
